@@ -7,19 +7,19 @@
     <title>Babylon.js sample code</title>
 
     <!-- Babylon.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-    <script src="https://preview.babylonjs.com/ammo.js"></script>
-    <script src="https://preview.babylonjs.com/cannon.js"></script>
-    <script src="https://preview.babylonjs.com/Oimo.js"></script>
-    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-    <script src="https://preview.babylonjs.com/babylon.js"></script>
-    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <script src="babylonjs/dat.gui.min.js"></script>
+    <script src="babylonjs/ammo.js"></script>
+    <script src="babylonjs/cannon.js"></script>
+    <script src="babylonjs/Oimo.js"></script>
+    <script src="babylonjs/earcut.min.js"></script>
+    <script src="babylonjs/babylon.js"></script>
+    <script src="babylonjs/babylonjs.materials.min.js"></script>
+    <script src="babylonjs/babylonjs.proceduralTextures.min.js"></script>
+    <script src="babylonjs/babylonjs.postProcess.min.js"></script>
+    <script src="babylonjs/babylonjs.loaders.js"></script>
+    <script src="babylonjs/babylonjs.serializers.min.js"></script>
+    <script src="babylonjs/babylon.gui.min.js"></script>
+    <script src="babylonjs/babylon.inspector.bundle.js"></script>
 
     <style>
         html,
@@ -49,17 +49,17 @@
         var scene = null;
         var sceneToRender = null;
         var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
-        engine.setHardwareScalingLevel(0.25);
+        engine.setHardwareScalingLevel(0.1);
 
         var createScene = function () {
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
-    scene.collisionsEnabled = true;
+    // scene.collisionsEnabled = true;
 
-    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv_l.hdr", scene, 128, false, true, false, true);
+    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv.hdr", scene, 1024, false, true, false, true);
     scene.environmentTexture = hdrTexture
-    scene.environmentIntensity = .7
-    hdrTexture.level = 0.8
+    scene.environmentIntensity = 1.5
+    hdrTexture.level = 1
 
 
     // This creates and positions a free camera (non-mesh)
@@ -91,53 +91,52 @@
 
 //     })
 
-//     scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-// //     //BABYLON.Scene.FOGMODE_NONE;
-// //     //BABYLON.Scene.FOGMODE_EXP;
-// //     //BABYLON.Scene.FOGMODE_EXP2;
-// //     //BABYLON.Scene.FOGMODE_LINEAR;
+    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+//     //BABYLON.Scene.FOGMODE_NONE;
+//     //BABYLON.Scene.FOGMODE_EXP;
+//     //BABYLON.Scene.FOGMODE_EXP2;
+//     //BABYLON.Scene.FOGMODE_LINEAR;
 
-//     scene.fogColor = new BABYLON.Color3(0.29, 0.33, 0.68);
-//     scene.fogDensity = 0.012;
+    scene.fogColor = new BABYLON.Color3(0.29, 0.33, 0.68);
+    scene.fogDensity = 0.012;
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-    light.specular = new BABYLON.Color3(0, 0, 0)
+    // var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+    // light.specular = new BABYLON.Color3(0, 0, 0)
 
-    // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 2
+    // // Default intensity is 1. Let's dim the light a small amount
+    // light.intensity = 2
 
     BABYLON.SceneLoader.Append("https://smashelbow.github.io/test/", "map.glb", scene, function (scene) {
 
         // scene.createDefaultCamera(true, true, true)
 
+    
+        var ssaoRatio = {
+            ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
+            blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
+        };
 
-//         var ssaoRatio = {
-//             ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
-//             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
-//         };
+        var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
 
-//         var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
+        ssao2.expensiveBlur = true;
 
-//         ssao2.expensiveBlur = true;
+        ssao2.samples = 1;
 
-//         ssao2.samples = 1;
+        ssao2.totalStrength = 0.7;
+        ssao2.base = 0
+        ssao2.maxZ = 200;
+        ssao2.minZAspect = 0.02
+        ssao2.radius = 0.2;
 
-//         ssao2.totalStrength = 0.7;
-//         ssao2.base = 0
-//         ssao2.maxZ = 200;
-//         ssao2.minZAspect = 0.02
-//         ssao2.radius = 0.4;
-
-        // Attach camera to the SSAO render pipeline
         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
 
         scene.materials.forEach(m => {
             m.metallic = 0.7
-            m.roughness = 0.25
-            m.emissiveIntensity = 2
-            m.indexOfRefraction = 2
-            m.metallicF0Factor = 2
+            m.roughness = 0.35
+            m.emissiveIntensity = 1.5
+            m.indexOfRefraction = 0.7
+            m.metallicF0Factor = 4
         })
 
         var gl = new BABYLON.GlowLayer("gl", scene, {
@@ -164,13 +163,13 @@
         defaultPipeline.sharpenEnabled = true
         defaultPipeline.sharpen.edgeAmount = 0.2
         defaultPipeline.sharpen.colorAmount = 1
-        defaultPipeline.grainEnabled = true
+        // defaultPipeline.grainEnabled = true
         defaultPipeline.grain.intensity = 4
         defaultPipeline.imageProcessing.vignetteEnabled = true
         defaultPipeline.imageProcessing.vignetteWeight = 10
         defaultPipeline.imageProcessing.vignetteCameraFov = 0.3
         defaultPipeline.imageProcessing.vignetteStretch = 1
-        defaultPipeline.imageProcessing.contrast = 1.8
+        defaultPipeline.imageProcessing.contrast = 1.5
         // defaultPipeline.imageProcessing.exposure = 1.5
 
         
