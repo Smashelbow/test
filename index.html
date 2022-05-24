@@ -56,7 +56,7 @@
     var scene = new BABYLON.Scene(engine);
     // scene.collisionsEnabled = true;
 
-    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv.hdr", scene, 1024, false, true, false, true);
+    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv.hdr", scene, 128, false, true, false, true);
     scene.environmentTexture = hdrTexture
     scene.environmentIntensity = 1.5
     hdrTexture.level = 1
