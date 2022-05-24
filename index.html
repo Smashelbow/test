@@ -112,24 +112,24 @@
         // scene.createDefaultCamera(true, true, true)
 
     
-//         var ssaoRatio = {
-//             ssaoRatio: 1, // Ratio of the SSAO post-process, in a lower resolution
-//             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
-//         };
+        var ssaoRatio = {
+            ssaoRatio: 1, // Ratio of the SSAO post-process, in a lower resolution
+            blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
+        };
 
-//         var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
+        var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
 
-//         ssao2.expensiveBlur = true;
+        ssao2.expensiveBlur = true;
 
-//         ssao2.samples = 1;
+        ssao2.samples = 1;
 
-//         ssao2.totalStrength = 0.65;
-//         ssao2.base = 0
-//         ssao2.maxZ = 200;
-//         ssao2.minZAspect = 0.5
-//         ssao2.radius = 0.1;
+        ssao2.totalStrength = 0.65;
+        ssao2.base = 0
+        ssao2.maxZ = 200;
+        ssao2.minZAspect = 0.5
+        ssao2.radius = 0.1;
 
-//         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
+        scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
 
         scene.materials.forEach(m => {
             m.metallic = 0.7
