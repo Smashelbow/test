@@ -105,29 +105,29 @@
     light.specular = new BABYLON.Color3(0, 0, 0)
 
     // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 3
+    light.intensity = 2
 
     BABYLON.SceneLoader.Append("https://smashelbow.github.io/test/", "map.glb", scene, function (scene) {
 
         // scene.createDefaultCamera(true, true, true)
 
 
-        var ssaoRatio = {
-            ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
-            blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
-        };
+//         var ssaoRatio = {
+//             ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
+//             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
+//         };
 
-        var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
+//         var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
 
-        ssao2.expensiveBlur = true;
+//         ssao2.expensiveBlur = true;
 
-        ssao2.samples = 1;
+//         ssao2.samples = 1;
 
-        ssao2.totalStrength = 0.7;
-        ssao2.base = 0
-        ssao2.maxZ = 200;
-        ssao2.minZAspect = 0.02
-        ssao2.radius = 0.4;
+//         ssao2.totalStrength = 0.7;
+//         ssao2.base = 0
+//         ssao2.maxZ = 200;
+//         ssao2.minZAspect = 0.02
+//         ssao2.radius = 0.4;
 
         // Attach camera to the SSAO render pipeline
         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
@@ -137,7 +137,7 @@
             m.roughness = 0.25
             m.emissiveIntensity = 2
             m.indexOfRefraction = 2
-            m.metallicF0Factor = 3.5
+            m.metallicF0Factor = 2
         })
 
         var gl = new BABYLON.GlowLayer("gl", scene, {
