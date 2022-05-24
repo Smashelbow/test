@@ -56,7 +56,7 @@
     var scene = new BABYLON.Scene(engine);
     // scene.collisionsEnabled = true;
 
-    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv.hdr", scene, 128, false, true, false, true);
+    var hdrTexture = new BABYLON.HDRCubeTexture("https://smashelbow.github.io/test/scifienv.hdr", scene, 1024, false, true, false, true);
     scene.environmentTexture = hdrTexture
     scene.environmentIntensity = 1.5
     hdrTexture.level = 1
@@ -91,14 +91,14 @@
 
 //     })
 
-    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-//     //BABYLON.Scene.FOGMODE_NONE;
-//     //BABYLON.Scene.FOGMODE_EXP;
-//     //BABYLON.Scene.FOGMODE_EXP2;
-//     //BABYLON.Scene.FOGMODE_LINEAR;
+//     scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+// //     //BABYLON.Scene.FOGMODE_NONE;
+// //     //BABYLON.Scene.FOGMODE_EXP;
+// //     //BABYLON.Scene.FOGMODE_EXP2;
+// //     //BABYLON.Scene.FOGMODE_LINEAR;
 
-    scene.fogColor = new BABYLON.Color3(0.29, 0.33, 0.68);
-    scene.fogDensity = 0.012;
+//     scene.fogColor = new BABYLON.Color3(0.29, 0.33, 0.68);
+//     scene.fogDensity = 0.012;
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     // var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
@@ -112,24 +112,24 @@
         // scene.createDefaultCamera(true, true, true)
 
     
-      var ssaoRatio = {
-            ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
-            blurRatio: 2// Ratio of the combine post-process (combines the SSAO and the scene)
-        };
+//         var ssaoRatio = {
+//             ssaoRatio: 1, // Ratio of the SSAO post-process, in a lower resolution
+//             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
+//         };
 
-        var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
+//         var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
 
-        ssao2.expensiveBlur = true;
+//         ssao2.expensiveBlur = true;
 
-        ssao2.samples = 1;
+//         ssao2.samples = 1;
 
-        ssao2.totalStrength = 2;
-        ssao2.base = 0
-        ssao2.maxZ = 200;
-        ssao2.minZAspect = 0.002
-        ssao2.radius = 0.4;
+//         ssao2.totalStrength = 0.65;
+//         ssao2.base = 0
+//         ssao2.maxZ = 200;
+//         ssao2.minZAspect = 0.5
+//         ssao2.radius = 0.1;
 
-        scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
+//         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
 
         scene.materials.forEach(m => {
             m.metallic = 0.7
