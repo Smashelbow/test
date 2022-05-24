@@ -60,7 +60,7 @@
     scene.environmentTexture = hdrTexture
     scene.environmentIntensity = 1.5
     hdrTexture.level = 1
-
+    // scene.debugLayer.show({ showExplorer: true });//传说中的inspector调试工具
 
     // This creates and positions a free camera (non-mesh)
     // var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 0, new BABYLON.Vector3(0, 130, -10), scene);
@@ -113,7 +113,7 @@
 
     
         var ssaoRatio = {
-            ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
+            ssaoRatio: 1, // Ratio of the SSAO post-process, in a lower resolution
             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
         };
 
@@ -123,11 +123,11 @@
 
         ssao2.samples = 1;
 
-        ssao2.totalStrength = 0.7;
+        ssao2.totalStrength = 0.65;
         ssao2.base = 0
         ssao2.maxZ = 200;
-        ssao2.minZAspect = 0.02
-        ssao2.radius = 0.2;
+        ssao2.minZAspect = 0.5
+        ssao2.radius = 0.1;
 
         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
 
@@ -157,10 +157,10 @@
         defaultPipeline.bloomThreshold = 2
         defaultPipeline.bloomScale = 1
         defaultPipeline.samples = 8
-        defaultPipeline.chromaticAberrationEnabled = true
+        // defaultPipeline.chromaticAberrationEnabled = true
         defaultPipeline.chromaticAberration.aberrationAmount = 18
         defaultPipeline.chromaticAberration.radialIntensity = 1
-        defaultPipeline.sharpenEnabled = true
+        // defaultPipeline.sharpenEnabled = true
         defaultPipeline.sharpen.edgeAmount = 0.2
         defaultPipeline.sharpen.colorAmount = 1
         // defaultPipeline.grainEnabled = true
