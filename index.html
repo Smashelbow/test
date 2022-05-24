@@ -111,23 +111,23 @@
 
         // scene.createDefaultCamera(true, true, true)
 
-        // var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, 0.1, scene.activeCamera, true)
-//         var ssaoRatio = {
-//             ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
-//             blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
-//         };
 
-//         var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
+        var ssaoRatio = {
+            ssaoRatio: 5, // Ratio of the SSAO post-process, in a lower resolution
+            blurRatio: 1// Ratio of the combine post-process (combines the SSAO and the scene)
+        };
 
-//         ssao2.expensiveBlur = true;
+        var ssao2 = new BABYLON.SSAO2RenderingPipeline("ssao2", scene, ssaoRatio, null, false);
 
-//         ssao2.samples = 1;
+        ssao2.expensiveBlur = true;
 
-//         ssao2.totalStrength = 0.7;
-//         ssao2.base = 0
-//         ssao2.maxZ = 200;
-//         ssao2.minZAspect = 0.02
-//         ssao2.radius = 0.4;
+        ssao2.samples = 1;
+
+        ssao2.totalStrength = 0.7;
+        ssao2.base = 0
+        ssao2.maxZ = 200;
+        ssao2.minZAspect = 0.02
+        ssao2.radius = 0.4;
 
         // Attach camera to the SSAO render pipeline
         scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao2", scene.activeCamera);
